@@ -16,33 +16,25 @@ private:
         return dp[i][j] = mini;
     }
 public:
-    int minCost(int len, vector<int>& cuts) {
-
-        // cuts.insert(cuts.begin(), 0);
-        // cuts.push_back(len);
-        // sort(cuts.begin(), cuts.end());
-        // int c = cuts.size();
-        // vector<vector<int>> dp(len, vector<int>(len, -1));
-        // return solve(1, c-2, cuts, dp);
-        cuts.insert(cuts.begin(), 0);
-        cuts.push_back(len);
-        int n = cuts.size();
+    int minCost(int n, vector<int>& cuts) {
+        int m = cuts.size();
+        cuts.push_back(0);
+        cuts.push_back(n);
         sort(cuts.begin(), cuts.end());
-        vector<vector<int>> dp(n+1, vector<int>(n+1));
-        
-        for(int i = n-2; i >= 1; i--)
-        {
-            for(int j = i; j <= n-2; j++)
-            {
+        vector<vector<int>>dp(m+2, vector<int>(m+2, 0));
+        for(int i = m; i >= 1; i--){
+            for(int j = 1; j <= m; j++){
+                if(i > j){continue;}
                 int mini = INT_MAX;
                 for(int k = i; k <= j; k++)
                 {
-                    mini = min(mini, cuts[j+1] - cuts[i-1] + dp[i][k-1] + dp[k+1][j]);
+                    int ans = cuts[j+1] - cuts[i-1] + dp[i][k-1] + dp[k+1][j];
+                    mini = min(mini, ans);
                 }
                 dp[i][j] = mini;
             }
         }
 
-        return dp[1][n-2];
+        return dp[1][m];
     }
 };
