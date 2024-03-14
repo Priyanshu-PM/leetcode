@@ -45,7 +45,7 @@ public:
                 if(i > 0)    up = dp[i-1][j];
                 if(j > 0)    left = dp[i][j-1];    
                     
-                dp[i][j] += left + up;
+                dp[i][j] = dp[i][j] + left + up;
             }
         }
         return dp[m-1][n-1];
