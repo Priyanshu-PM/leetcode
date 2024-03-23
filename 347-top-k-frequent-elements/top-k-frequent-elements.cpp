@@ -17,8 +17,7 @@ public:
         {
             // cout << it.first << " : " << it.second << " | ";
             pq.push({it.first, it.second});
-        }    
-        cout << "\n";
+        }
         vector<int> ans;
         while(!pq.empty() && k--)
         {
