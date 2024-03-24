@@ -56,11 +56,6 @@ public:
             }
             // node->increasePrefix();
         }
-        if(node->index == -1 || node->minLen > len)
-        {
-            node->minLen = min(node->minLen, len);
-            node->index = i;
-        }
         // node->increaseEnd();
     }
 
