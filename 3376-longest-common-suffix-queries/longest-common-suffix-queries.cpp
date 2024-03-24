@@ -1,8 +1,6 @@
 struct Node {
 public:
     Node* links[26];
-    int endsWith = 0;
-    int countPrefix = 0;
     int index = -1, minLen = INT_MAX;
 
     bool containsKey(char ch)
