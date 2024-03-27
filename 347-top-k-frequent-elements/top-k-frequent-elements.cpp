@@ -1,5 +1,3 @@
-#define pi pair<int, int>
-
 class Solution {
 public:
     struct cmp {
