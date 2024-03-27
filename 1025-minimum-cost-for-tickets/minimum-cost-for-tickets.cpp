@@ -14,8 +14,8 @@ public:
                 while(m < n && days[m] < days[i] + span[j])
                 {
                     m++;
+                    dp[i] = min(dp[i], costs[j] + dp[m]);
                 }
-                dp[i] = min(dp[i], costs[j] + dp[m]);
             }
         }
         return dp[0];
