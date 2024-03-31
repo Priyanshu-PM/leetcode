@@ -3,20 +3,14 @@ public:
     int numberOfSubstrings(string s) {
     
         int n = s.size();
-        if(n == 50000)  return 49998;
+        vector<int> freq(3, -1);
         int count = 0;
-
         for(int i = 0; i < n; i++)
         {
-            set<char> st;
-            for(int j = i; j < n; j++)
+            freq[s[i] - 'a'] = i;
+            if(freq[0] != -1 && freq[1] != -1 && freq[2] != -1)
             {
-                st.insert(s[j]);
-                if(st.size() == 3)
-                {
-                    count += n - j;
-                    break;
-                }
+                count += 1 + min(freq[0], min(freq[1], freq[2]));
             }
         }
 
