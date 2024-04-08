@@ -11,15 +11,14 @@ public:
             while(counter--)
             {
                 int stud = q.front();
+                q.pop();
                 if(stud == sandwiches[index])
                 {
                     take = true;
-                    q.pop();
                     break;
                 }
                 else
                 {
-                    q.pop();
                     q.push(stud);
                 }
             }
