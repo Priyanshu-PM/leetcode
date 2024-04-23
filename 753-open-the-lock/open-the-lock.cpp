@@ -1,14 +1,15 @@
 class Solution {
 public:
     int openLock(vector<string>& deadends, string target) {
-        unordered_set<string> deadendSet(deadends.begin(), deadends.end());
-        if (deadendSet.count("0000")) {
+        
+        unordered_set<string> visited(deadends.begin(), deadends.end());
+        if (visited.count("0000")) {
             return -1;
         }
         
         queue<pair<string, int>> queue;
         queue.push({"0000", 0});
-        unordered_set<string> visited;
+        // unordered_set<string> visited;
         visited.insert("0000");
         
         while (!queue.empty()) {
@@ -27,7 +28,7 @@ public:
                     string newCombination = currentCombination;
                     newCombination[i] = '0' + newDigit;
                     
-                    if (visited.find(newCombination) == visited.end() && deadendSet.find(newCombination) == deadendSet.end()) {
+                    if (visited.find(newCombination) == visited.end()) {
                         visited.insert(newCombination);
                         queue.push({newCombination, moves + 1});
                     }
