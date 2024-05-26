@@ -20,8 +20,26 @@ private:
 public:
     int checkRecord(int n) {
 
-        memset(dp, -1, sizeof(dp));
-        int day = n;
-        return solve(day, 0, 0);
+        memset(dp, 0, sizeof(dp));
+        // int day = n;
+        // return solve(day, 0, 0);
+
+        for(int i = 0; i <= n; i++) {
+            for(int A = 0; A <= 1; A++) {
+                for(int L = 0; L <= 2; L++) {
+
+                    if(i == 0) dp[i][A][L] = 1;
+                    else {
+                        long long ans = 0;
+                        ans += dp[i-1][A][0] % MOD;
+                        ans += (A == 0) ? dp[i-1][A+1][0] % MOD : 0;
+                        ans += (L <= 1) ? dp[i-1][A][L+1] % MOD : 0;
+
+                        dp[i][A][L] = ans % MOD;
+                    }
+                }
+            }
+        }
+        return dp[n][0][0];
     }
 };
