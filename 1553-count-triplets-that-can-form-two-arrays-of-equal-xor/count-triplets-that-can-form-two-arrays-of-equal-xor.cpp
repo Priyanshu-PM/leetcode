@@ -2,26 +2,24 @@ class Solution {
 public:
     int countTriplets(vector<int>& arr) {
         
-        //  brute force
-        int count = 0;
         int n = arr.size();
+        if(n == 1)  return 0;
+        // a=arr[i] ^ arr[i+1] ^ ... ^ arr[j-1]
+        // b = arr[j] ^ arr[j + 1] ^ ... ^ arr[k]
+        // Note i < j <= k 
+        // a==b <=> a^b==0 
+
+        int ans = 0;
         for(int i = 0; i < n; i++) {
-
-            for(int j = i+1; j < n; j++) {
-
-                int part1 = 0;
-                for(int k = i; k < j; k++) {
-                    part1 = part1 ^ arr[k];
-                }
-
-                int part2 = 0;
-                for(int k = j; k < n; k++) {
-                    part2 = part2 ^ arr[k];
-                    if(part1 == part2)  count++;
-                }
+            int xor_sum = 0;    //variable instead of an array
+            // xor(arr[i...k])
+            for(int k = i; k < n; k++) {
+                xor_sum = xor_sum ^ arr[k];
+                // For given i, k there are (k-i) choices for  j
+                if(xor_sum == 0)
+                    ans += (k - i);
             }
         }
-
-        return count;
+        return ans;
     }
 };
