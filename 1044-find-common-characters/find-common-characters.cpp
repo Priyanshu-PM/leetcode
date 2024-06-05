@@ -3,7 +3,6 @@ public:
     vector<string> commonChars(vector<string>& words) {
         
         vector<int> freq(26, 200);
-
         for(int i = 0; i < words.size(); i++) 
         {
             vector<int> temp(26, 0);
