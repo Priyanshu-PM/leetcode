@@ -38,7 +38,7 @@ public:
             temp = temp->get(s[i]);
         }
         temp->isEnd = true;
-        cout << s <<  " - inserted in trie\n";
+        // cout << s <<  " - inserted in trie\n";
     }
 
     string containsRoot(string s) {
@@ -72,7 +72,7 @@ public:
         while(getline(ss, temp, ' '))
         {
             string rootword = obj->containsRoot(temp);
-            cout << "temp - " << temp << " || rootword - " << rootword << "\n";
+            // cout << "temp - " << temp << " || rootword - " << rootword << "\n";
             if(rootword != "") {
                 ans += rootword + " ";
             }
