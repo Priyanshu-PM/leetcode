@@ -8,9 +8,16 @@ public:
         int sum = 0, cnt = 0;
         for(int i = 0; i < n; i++)
         {
-            sum = ((sum + nums[i]) % k + k ) % k;
-            cnt += mpp[sum];
-            mpp[sum]++;
+            sum += nums[i];
+            int rem = sum % k;
+            if(rem < 0) {
+                rem += k;
+            }
+
+            if(mpp.find(rem) != mpp.end()) {
+                cnt += mpp[rem];
+            }
+            mpp[rem]++;
         }
         return cnt;
     }
