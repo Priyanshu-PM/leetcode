@@ -9,7 +9,7 @@ public:
         vector<int> map(128, 0);
         int count = t.length();
         int start = 0, end = 0, minLen = INT_MAX, startIndex = 0;
-
+ 
         for (char c : t) {
             map[c]++;
         }
