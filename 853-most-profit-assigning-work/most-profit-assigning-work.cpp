@@ -8,7 +8,7 @@ public:
             pq.push({profit[i], difficulty[i]});
         }
 
-        sort(worker.rbegin(), worker.rend());
+        sort(worker.rbegin(), worker.rend());   //  descending order
 
         int maxi = 0, i = 0, n = worker.size();
         while(i < n)
