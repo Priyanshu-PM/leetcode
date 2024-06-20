@@ -7,16 +7,45 @@ typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics
 
 class Solution {
 public:
+    int n;
+    vector<int> bit;
+
+    void update(int val, int id)
+    {
+        while(id <= n) {
+            bit[id] += val;
+            id += (id & -id);
+        }
+    }
+
+    int query(int id)
+    {
+        int ans = 0;
+        while(id > 0) {
+            ans += bit[id];
+            id -= (id & -id);
+        }
+        return ans;
+    }
+
     vector<int> countSmaller(vector<int>& nums) {
 
-        vector<int> ans(nums.size(), 0);
-        ordered_set st;
-        for(int i = nums.size()-1; i >= 0; i--) {
-            st.insert(nums[i]);
+        n = nums.size();
+        bit = vector<int>(n+1, 0);
 
-            ans[i] = st.order_of_key(nums[i]);
+        vector<pair<int,int>> v;
+        for(int i = 0; i < n; i++) {
+            v.push_back({nums[i], i});
         }
+        
+        sort(v.begin(), v.end());
 
+        vector<int> ans(n, 0);
+
+        for(auto &[ele, id]: v) {
+            update(1, id+1);
+            ans[id] = query(n) - query(id+1);
+        }
         return ans;
     }
 };
