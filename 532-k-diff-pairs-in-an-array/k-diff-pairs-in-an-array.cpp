@@ -3,11 +3,9 @@ public:
     int findPairs(vector<int>& nums, int k) {
         
         int n = nums.size();
-        sort(begin(nums), end(nums));
         map<int, int> mp;
         for(int ele: nums)  mp[ele]++;
 
-        int low = 0, high = n-1;
         int ans = 0;
         for(auto it: mp)
         {
