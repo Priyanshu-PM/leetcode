@@ -7,19 +7,16 @@ public:
         int count = 0;
         for(int i = 0; i < s.size(); i++) {
 
-            unordered_map<char, int> mpp;
-            
-            for(int j = i; j < s.size(); j++) {
-                
-                mpp[s[j]]++;
-                int maxi = INT_MIN;
-                int mini = INT_MAX;
-                
-                for(auto it: mpp) {
-                    maxi = max(maxi, it.second);
-                    mini = min(mini, it.second);
+            unordered_map<int, int> mpp;
+            multiset<int> st;
+            for(int j = i; j < s.size(); j++)
+            {
+                if(mpp.find(s[j]) != mpp.end()) {
+                    st.erase(st.find(mpp[s[j]]));
                 }
-                count += (maxi - mini);
+                mpp[s[j]]++;
+                st.insert(mpp[s[j]]);
+                count += (*st.rbegin() - *st.begin());
             }
         }
 
