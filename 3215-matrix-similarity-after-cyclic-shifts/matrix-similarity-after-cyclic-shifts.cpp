@@ -17,9 +17,11 @@ public:
                 reverse(temp[i].begin(), temp[i].begin() + k);
                 reverse(temp[i].begin()+k, temp[i].end());
                 reverse(temp[i].begin(), temp[i].end());
+
             }
+            if(temp[i] != mat[i])   return false;
         }
 
-        return temp == mat;
+        return true;
     }
 };
