@@ -7,8 +7,9 @@ public:
         {
             int rem = numBottles % numExchange;
             int extra = numBottles / numExchange;
-            numBottles = extra + rem;
-            ans = ans + extra;
+
+            numBottles = rem + extra;
+            ans += extra;
         }
         return ans;
     }
