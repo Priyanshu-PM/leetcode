@@ -24,8 +24,9 @@ private:
 public:
     int kthSmallest(TreeNode* root, int k) {
 
+        //  O(1) space
+        //  O(N) time
         inOrder(root, k);
-
         return ans;
     }
 };
