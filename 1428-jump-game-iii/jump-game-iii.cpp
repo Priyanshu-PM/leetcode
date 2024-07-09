@@ -2,9 +2,8 @@ class Solution {
 private:
     int solve(vector<int>& arr, int index, vector<int>& vis)
     {
-        if(index < 0 || index >= arr.size())    return 0;
-        vis[index] = 1;
         if(arr[index] == 0) return 1;
+        vis[index] = 1;
 
         int extra = arr[index];
         if(index + extra < arr.size() && !vis[index + extra] && solve(arr, index + extra, vis))
