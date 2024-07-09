@@ -3,35 +3,30 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
 
         int n = intervals.size();
-        if(n == 0)  return {newInterval};   //  base case
+        int new_start = newInterval[0];
+        int new_end = newInterval[1];
 
-        bool inserted = false;
-
-        for(int i = 0; i < n; i++)
+        vector<vector<int>> ans;
+        int i = 0;
+        while(i < n && intervals[i][1] < new_start)
         {
-            if(!inserted && intervals[i][0] > newInterval[0])
-            {
-                intervals.insert(intervals.begin() + i, newInterval);
-                inserted = true;
-                break;
-            }
+            ans.push_back(intervals[i]);
+            i++;
+        }
+        
+        while(i < n && intervals[i][0] <= new_end)
+        {
+            new_start = min(new_start, intervals[i][0]);
+            new_end = max(new_end, intervals[i][1]);
+            i++;
         }
 
-        if(!inserted)    intervals.push_back(newInterval);
+        ans.push_back({new_start, new_end});
 
-        n = intervals.size();
-        vector<vector<int>> ans;
-        for(int i = 0; i < n; i++) 
-        {
-            if (ans.empty() || intervals[i][0] > ans.back()[1]) 
-            {
-                ans.push_back(intervals[i]);
-            }
-            // if the current interval
-            // lies in the last interval:
-            else {
-                ans.back()[1] = max(ans.back()[1], intervals[i][1]);
-            }
+        while(i < n)
+        { 
+            ans.push_back(intervals[i]);
+            i++;
         }
         return ans;
     }
