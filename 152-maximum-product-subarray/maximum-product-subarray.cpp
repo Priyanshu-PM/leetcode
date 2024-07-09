@@ -2,29 +2,17 @@ class Solution {
 public:
     int maxProduct(vector<int>& nums) {
 
-        // jugaad for 191th/191 test case 
-        vector<int> temp = {0, 10, 10, 10, 10, 10, 10, 10, 10, 10, -10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0};
-        if(temp == nums) return 1000000000;
-        // 190/191 test cases passed
-
-        int prefix = 1;
-        int suffix = 1;
         int n = nums.size();
-        int maxi = INT_MIN;
-
+        double ans = INT_MIN;
+        double pr = 1, su = 1;
         for(int i = 0; i < n; i++) {
+            pr *= nums[i];
+            su *= nums[n - i - 1];
 
-            if(prefix == 0) prefix = 1;
-            if(suffix == 0) suffix = 1;
-
-            prefix = prefix * (long long) nums[i];
-            suffix = suffix * (long long) nums[n-i-1];
-
-            maxi = max(maxi, (max(prefix, suffix)));
+            ans = max({ans, pr, su});
+            if(pr == 0) pr = 1;
+            if(su == 0) su = 1;
         }
-
-        return maxi;
-
-
+        return ans;
     }
 };
