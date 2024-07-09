@@ -10,12 +10,8 @@ private:
         if(dp[index] != -1) return dp[index];
 
         for(int i = 1; i <= nums[index]; i++) {
-
-            if(index + i < n) 
-            {
-                if(solve(index+i, nums, dp, n) == 1) {
-                    return dp[index] = 1;
-                }
+            if(solve(index+i, nums, dp, n) == 1) {
+                return dp[index] = 1;
             }
         }
         return dp[index] = 0;
