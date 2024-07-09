@@ -23,9 +23,6 @@ public:
         int n = nums.size();
         vector<int> dp(n, -1);
 
-        if(solve(0, nums, dp, n) == 1)
-            return true;
-
-        return false;
+        return (solve(0, nums, dp, n) == 1);
     }
 };
