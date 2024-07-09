@@ -16,17 +16,17 @@ private:
 public:
     int countSubstrings(string s) {
         int n = s.size();
-        vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
-        int cnt = 0;
-        for(int i = 0; i < n; i++)
-        {
-            for(int j = i; j < n; j++)
-            {
-                if(isPalindrome(s, i, j, dp))    cnt++;
-            }
-        }
-        return cnt;
-        // vector<vector<bool>> dp(n, vector<bool>(n, false));
+        // vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
+        // int cnt = 0;
+        // for(int i = 0; i < n; i++)
+        // {
+        //     for(int j = i; j < n; j++)
+        //     {
+        //         if(isPalindrome(s, i, j, dp))    cnt++;
+        //     }
+        // }
+        // return cnt;
+        vector<vector<bool>> dp(n, vector<bool>(n, false));
         for(int l = 1; l <= n; l++)
         {
             for(int i = 0; i + l - 1 < n; i++)
@@ -49,7 +49,7 @@ public:
                 }
             }
         }
-        // int cnt = 0;
+        int cnt = 0;
         for(int i = 0; i < n; i++)
             for(int j = i; j < n; j++)
                 if(dp[i][j])
