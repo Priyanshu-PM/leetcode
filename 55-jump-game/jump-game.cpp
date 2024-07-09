@@ -3,12 +3,9 @@ class Solution {
 private:
     bool solve(int index, vector<int>& nums, vector<int>& dp, int n) {
 
-        if(index >= n) {
+        if(index >= n-1) {
             return dp[index] =  1;
-        }
-        if(index == n-1) {
-            return dp[index] = 1;
-        }   
+        } 
 
         if(dp[index] != -1) return dp[index];
 
