@@ -1,60 +1,35 @@
 class Solution {
 private:
-    bool isPalindrome(string &s, int i, int j, vector<vector<int>>& dp)
-    {
-        if(i > j)   return 1;
+    bool solve(vector<vector<bool>> &dp, int i, int j, string &s) {
 
-        //  memoization
-        if(dp[i][j] != -1)  return dp[i][j];
-
-        if(s[i] == s[j])
-        {
-            return dp[i][j] = isPalindrome(s, i+1, j-1, dp);
+        if(i == j)
+            return dp[i][j] = true;
+        if(j - i == 1) {
+            if(s[i] == s[j])
+                return dp[i][j] = true;
+            else 
+                return dp[i][j] = false;
         }
-        return dp[i][j] = 0;
+        if(s[i] == s[j] && dp[i+1][j-1] == true) {
+            return dp[i][j] = true;
+        } else {
+            return dp[i][j] = false;
+        }
     }
+
 public:
     int countSubstrings(string s) {
         int n = s.size();
-        // vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
-        // int cnt = 0;
-        // for(int i = 0; i < n; i++)
-        // {
-        //     for(int j = i; j < n; j++)
-        //     {
-        //         if(isPalindrome(s, i, j, dp))    cnt++;
-        //     }
-        // }
-        // return cnt;
+        int cnt = 0;
         vector<vector<bool>> dp(n, vector<bool>(n, false));
-        for(int l = 1; l <= n; l++)
-        {
-            for(int i = 0; i + l - 1 < n; i++)
-            {
-                int j = i + l - 1;
-                if(i == j)
-                {
-                    dp[i][j] = true;
-                }
-                else if(i+1 == j)
-                {
-                    if(s[i] == s[j])    dp[i][j] = true;
-                }
-                else
-                {
-                    if(s[i] == s[j] && dp[i+1][j-1] == true)
-                    {
-                        dp[i][j] = true;
-                    }
+        for(int g = 0; g < n; g++) {
+            for(int i = 0, j = g; j < n; i++, j++) {
+                solve(dp, i, j, s);
+                if(dp[i][j] == true) {
+                    cnt++;
                 }
             }
         }
-        int cnt = 0;
-        for(int i = 0; i < n; i++)
-            for(int j = i; j < n; j++)
-                if(dp[i][j])
-                    cnt++;
-
         return cnt;
     }
 };
