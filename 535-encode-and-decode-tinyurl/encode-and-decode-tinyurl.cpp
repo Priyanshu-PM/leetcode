@@ -2,26 +2,14 @@ class Solution {
 public:
 
     map<string, string> mp;
-
-    string gen_random(int len) {
-        static const char alphanum[] =
-            "0123456789"
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            "abcdefghijklmnopqrstuvwxyz";
-        string tmp_s;
-
-        for (int i = 0; i < len; ++i) {
-            tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
-        }
-        
-        return tmp_s;
-    }
+    long int num = 10000;
 
     // Encodes a URL to a shortened URL.
     string encode(string longUrl) {
         
         int n = longUrl.size();
-        string tinyurl = "http://tinyurl.com/"+gen_random(8);
+        string tinyurl = "http://tinyurl.com/"+to_string(num) + "X";
+        num++;
         mp[tinyurl] = longUrl;
         return tinyurl;
     }
