@@ -13,7 +13,7 @@ class Solution {
 public:
     vector<int> dfs(TreeNode* root, int distance, int &cnt)
     {
-        if(!root)   return {0};
+        if(!root)   return {};
 
         if(!root->left && !root->right) return {1};
 
