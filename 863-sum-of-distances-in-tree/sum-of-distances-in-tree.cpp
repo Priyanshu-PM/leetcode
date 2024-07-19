@@ -3,17 +3,15 @@ public:
     // Observation Based question -> read below comments for better understanding.
 
     // dfs is for finding the result of 0th node and number of childrens of each node.
-    int dfs(int node, vector<int> adj[], vector<int>& child, vector<int>& visited, int &res, int level)
+    int dfs(int node, int parent, vector<int> adj[], vector<int>& child, int &res, int level)
     {
-        visited[node] = 1;
         res += level;
-
         int children = 0;
         for(auto neigh: adj[node])
         {
-            if(!visited[neigh])
+            if(neigh != parent)
             {
-                children += dfs(neigh, adj, child, visited, res, level + 1);
+                children += dfs(neigh, node, adj, child, res, level + 1);
             }
         }
         return child[node] = children + 1;
@@ -30,9 +28,8 @@ public:
         int res = 0;
         int level = 0;
         vector<int> child(n, 0);
-        vector<int> visited(n, 0);
 
-        int temp = dfs(0, adj, child, visited, res, level);
+        int temp = dfs(0, 0, adj, child, res, level);
         // Now you have , number of childrens of each node and 0th node answer in 'res' .
         // For each node find its parent result. and node answer will be -> (paren_val - number of node children + number of upper nodes)
 
