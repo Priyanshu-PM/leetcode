@@ -1,21 +1,23 @@
 class LRUCache {
 public:
-    struct Node{
+    struct Node {
+
         int key, val;
         Node* prev;
         Node* next;
         Node(int k, int v) {
             key = k;
             val = v;
-            next = NULL;
             prev = NULL;
+            next = NULL;
         }
     };
+    
+    int cap = 0;
 
     struct Node* head = new Node(-1, -1);
     struct Node* tail = new Node(-1, -1);
 
-    int cap = 0;
     unordered_map<int, Node*> mpp;
 
     LRUCache(int capacity) {
@@ -24,11 +26,9 @@ public:
         tail->prev = head;
     }
     
-    //  extra functions
     void addNode(Node* newNode)
     {
         struct Node* temp = head->next;
-
         newNode->next = temp;
         temp->prev = newNode;
 
@@ -36,8 +36,7 @@ public:
         head->next = newNode;
     }
 
-    void deleteNode(Node* delNode)
-    {
+    void deleteNode(Node* delNode) {
         struct Node* n1 = delNode->prev;
         struct Node* n2 = delNode->next;
 
@@ -46,8 +45,9 @@ public:
     }
 
     int get(int key) {
-        if(mpp.find(key) != mpp.end())
-        {
+        
+        if(mpp.find(key) != mpp.end()) {
+
             struct Node* res = mpp[key];
             int ans = res->val;
 
@@ -55,19 +55,22 @@ public:
             deleteNode(res);
             addNode(res);
 
-            mpp[key] = head->next;
+            mpp[key] = res;
             return ans;
         }
+
         return -1;
     }
     
     void put(int key, int value) {
-        if(mpp.find(key) != mpp.end())
-        {
-            struct Node* curr = mpp[key];
+        
+        if(mpp.find(key) != mpp.end()) {
+
+            struct Node* current = mpp[key];
             mpp.erase(key);
-            deleteNode(curr);
+            deleteNode(current);
         }
+
         if(mpp.size() == cap) {
             mpp.erase(tail->prev->key);
             deleteNode(tail->prev);
