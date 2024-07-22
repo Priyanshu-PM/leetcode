@@ -40,7 +40,7 @@ public:
 
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
-                if(solve(i, j, index, board, word)) {
+                if(board[i][j] == word[0] && solve(i, j, index, board, word)) {
                     return true;
                 }
             }
