@@ -39,8 +39,6 @@ private:
         merge(start, mid, end, nums);
     }
 public:
-
-
     vector<int> sortArray(vector<int>& nums) {
         
         int n = nums.size();
