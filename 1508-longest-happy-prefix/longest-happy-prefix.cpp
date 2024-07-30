@@ -1,29 +1,16 @@
 class Solution {
 public:
     string longestPrefix(string s) {
-        
-        //  KMP algorithm
-        int n = s.size();
-        vector<int> lps(n, 0);
-        int len = 0;
-        int i = 1;
-        while(i < n)
-        {
-            if(s[i] == s[len]) {
-                len++;
-                lps[i] = len;
-                i++;
-            }
-            else {
-                if(len != 0)
-                    len = lps[len-1];
-                else {
-                    lps[i] = 0;
-                    i++;
-                }
-            }
+        int n=s.length();
+        vector<int> pre(n,0);
+        for(int i=1;i<n;i++){
+            int j=pre[i-1];
+            while(j>0 && s[i]!=s[j]) j=pre[j-1];
+            if(s[i]==s[j]) j++;
+            pre[i]=j;
         }
-
-        return s.substr(0, lps[n-1]);
+        // for(auto it:pre) cout<<it<<" ";
+        // cout<<endl;
+        return s.substr(0,pre[n-1]);
     }
 };
