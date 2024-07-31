@@ -67,10 +67,8 @@ public:
             }
         }
 
-        if(root == -1) 
-            return false;
+        if(root == -1)    return false;
 
         return isBinaryTreeValid(root, leftChild, rightChild);
-
     }
 };
