@@ -5,8 +5,10 @@ public:
         vector<int> freq(26);
         for(char c: word)   freq[c - 'a']++;
         sort(freq.rbegin(), freq.rend());
+        
         int ans = 0;
         int curr = 1, used = 0;
+
         for(auto x: freq)
         {
             ans += curr * x;
